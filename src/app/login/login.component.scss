@@ -1,0 +1,77 @@
+#login{
+    background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../../assets/rene-bohmer-481562-unsplash.jpg);
+    background-size: cover;
+    background-position: 50% 50% ;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #form-wrapper{
+        height: 305px;
+        width: 325px;
+        background: rgba(0,0,0,0.6);
+        padding: 50px;
+        color: whitesmoke;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1{
+            margin-top: 0;
+            margin-bottom: 30px;
+
+            .fa-compress-arrows-alt{
+                color: rgba(255,215,0, 0.9)
+            }
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            input::-webkit-input-placeholder{
+                font-family: 'quicksand';
+            }
+
+            input{
+                font-family: 'quicksand';
+                letter-spacing: -1px;
+                border: none;
+                padding: 5px;
+                margin-bottom: 5px;
+            }
+
+            .error{
+                margin-bottom: 5px;
+                color: red;
+                font-size: 14px;
+                align-self: flex-start;
+            }
+
+            #buttons{
+                width: 100%; 
+
+                button{
+                    margin-top: 5px;
+                    font-family: 'quicksand';
+                    padding:3px 5px 5px 5px;
+                    border: none;
+                    background: whitesmoke;
+                }
+
+                #loginBtn{
+                    margin-right: 5px;
+                    width: calc(50% - 5px);
+                }
+
+                #registerBtn{
+                    margin-left: 5px;
+                    width: calc(50% - 5px);
+                }
+            }
+        }
+    }
+}

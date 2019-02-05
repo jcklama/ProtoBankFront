@@ -1,0 +1,19 @@
+<div id="login">
+  <div id="form-wrapper" #wrapper>
+    <h1>ProtoBank
+      <i class="fas fa-compress-arrows-alt"></i>
+    </h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label for="username" class="visuallyhidden">Username</label>
+      <input type="text" placeholder="username" id="username" formControlName="username" required>
+      <div *ngIf="username.errors?.required && username.touched" class="error">Please enter a username</div>
+      <label for="password" class="visuallyhidden">Password</label>
+      <input type="text" placeholder="password" id="password" formControlName="password" required>
+      <div *ngIf="password.errors?.required && password.touched" class="error">Please enter a password</div>
+      <div id="buttons">
+        <button type="submit" id="loginBtn" (click)="onSubmit" [disabled]="!loginForm.valid">Login</button>
+        <button type="submit" id="registerBtn" (click)="onSubmit" [disabled]="!loginForm.valid">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
