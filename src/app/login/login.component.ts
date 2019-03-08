@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.loginForm.valid) {
-    //   this.router.navigateByUrl('/registration');
-    // }
+    if (this.loginForm.valid) {
+      this.router.navigateByUrl('/registration');
+    }
     console.log('submitted!');
     const loginInfo = { username: this.username.value, password: this.password.value };
     this.authService.login(loginInfo)
