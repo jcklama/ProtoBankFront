@@ -61,7 +61,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "CapcoBankFront:build"
+            "browserTarget": "CapcoBankFront:build",
+            "port": 4202
           },
           "configurations": {
             "production": {

@@ -12,8 +12,8 @@
       <div *ngIf="password.errors?.required && password.touched" class="error">Please enter a password</div>
       <div id="buttons">
         <button type="submit" id="loginBtn" (click)="onSubmit" [disabled]="!loginForm.valid">Login</button>
-        <button type="submit" id="registerBtn" (click)="onSubmit" [disabled]="!loginForm.valid">Register</button>
       </div>
     </form>
+    <button type="submit" id="registerBtn" (click)="onSubmit" [disabled]="!loginForm.valid">Register</button>
   </div>
 </div>

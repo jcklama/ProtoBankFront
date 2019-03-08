@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import ResizeObserver from 'resize-observer-polyfill'
-
+import { AuthService } from '../services/auth-service.service';
+import { HttpParams } from '../../../node_modules/@angular/common/http';
+// import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,11 @@ import ResizeObserver from 'resize-observer-polyfill'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   loginForm: FormGroup;
   @ViewChild('wrapper') wrapper: ElementRef;
@@ -42,9 +48,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      this.router.navigateByUrl('/registration');
-    }
+    // if (this.loginForm.valid) {
+    //   this.router.navigateByUrl('/registration');
+    // }
+    console.log('submitted!');
+    const loginInfo = { username: this.username.value, password: this.password.value };
+    this.authService.login(loginInfo)
+      // .map((resp: Response) => resp.json())
+      .subscribe(
+        resp => { console.log(resp); },
+        err => { console.log(err); }
+      )
   }
 
 }

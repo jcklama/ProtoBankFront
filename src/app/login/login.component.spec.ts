@@ -1,10 +1,10 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { APP_BASE_HREF } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '../../../node_modules/@angular/forms';
-import { BrowserModule, By } from '../../../node_modules/@angular/platform-browser';
-import { Routes, RouterModule } from '../../../node_modules/@angular/router';
-import { DebugElement } from '../../../node_modules/@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserModule, By } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
+import { DebugElement } from '@angular/core';
 
 describe('LoginComponent', () => {
   let login: LoginComponent;
