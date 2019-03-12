@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "CapcoBankFront"
+  "defaultProject": "CapcoBankFront",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

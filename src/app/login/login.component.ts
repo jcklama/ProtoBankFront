@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import ResizeObserver from 'resize-observer-polyfill'
 import { AuthService } from '../services/auth-service.service';
 import { HttpParams } from '../../../node_modules/@angular/common/http';
+import { AppStoreDispatcher } from '../dispatcher/dispatcher.store';
 // import 'rxjs/add/operator/map';
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dispatcher: AppStoreDispatcher
   ) { }
 
   loginForm: FormGroup;
@@ -37,6 +39,12 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     })
+
+    const test = { a: "hi", b: "bye" }
+    // const testAssign = Object.assign({}, test, { b: "one", c: "two" })
+    const test2 = { b: "two", c: "three" }
+    const testAssign = { ...test, ...test2 }
+    console.log(testAssign);
   }
 
   get username() {
@@ -53,6 +61,8 @@ export class LoginComponent implements OnInit {
     }
     console.log('submitted!');
     const loginInfo = { username: this.username.value, password: this.password.value };
+
+    this.dispatcher.setAuthInfo(loginInfo);
     this.authService.login(loginInfo)
       // .map((resp: Response) => resp.json())
       .subscribe(

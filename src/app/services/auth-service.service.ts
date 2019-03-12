@@ -13,7 +13,7 @@ export class AuthService {
 
   loginUrl: "http://localhost:3000/login";
 
-  login(loginInfo: object) {
+  login(loginInfo: loginInfo) {
 
     // const httpOptions = {
     //   headers: new HttpHeaders({
