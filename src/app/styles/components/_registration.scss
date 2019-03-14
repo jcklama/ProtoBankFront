@@ -1,0 +1,133 @@
+#registration{
+  display: flex;
+  font-size: 1.6rem;
+  font-family: $font-primary;
+
+  @include l {
+    flex-direction: column;
+  }
+
+  #left-panel, #right-panel{
+      width: 50%;
+      min-height: 100vh;
+
+      @include l {
+        width: 100%;
+      }
+  }
+
+  #left-panel{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: $color-primary-light;
+
+      #shop{
+          color: $color-white;
+          font-style: italic;
+          text-shadow: 0.3rem 0.3rem black;
+      }
+  }
+
+  #right-panel{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 5rem;
+      background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(../../assets/joel-filipe-191372-unsplash.jpg);
+      background-position: contain;
+
+      #form-wrapper{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: whitesmoke;
+          padding: 3.5rem;
+
+
+          h3{
+              margin: 0;
+
+              @include xs{
+                align-self: flex-start;
+              }
+          }
+
+          form{
+              display: flex;
+              flex-direction: column;
+
+              .sectionTitle{
+                  margin-bottom: 1rem;
+              }
+              .labels{
+                  display: flex;
+                  flex-wrap: wrap;
+              }
+
+              .productlabels{
+                  margin-bottom: 2rem;
+              }
+
+              input::-webkit-input-placeholder{
+                  font-family: $font-primary;
+              }
+
+              input{
+                  border: 0.2rem solid transparent;
+                  padding: 0.5rem;
+                  width: calc(50% - 1rem);
+                  margin-bottom: 1rem;
+                  margin-right: 1rem;
+                  font-family: $font-primary;
+
+                  @include s {
+                    width: 100%;
+                  }
+              }
+
+              input:focus{
+                  outline: 0;
+                  border-bottom: 0.2rem solid $color-primary-light;
+              }
+
+              button{
+                  width: 12rem;
+                  padding: 0.7px 1rem 0.7rem 1rem;
+                  font-family: $font-primary;
+                  margin-top: 1rem;
+                  margin: 0 auto;
+                  border: 0.1rem solid rgba(0,0,0,0.4);
+              }
+
+              button:focus{
+                  outline: 0;
+              }
+
+              .products{
+                  font-size: 1.6rem;
+                  display: flex;
+
+                  input{
+                      height: 1.4rem;
+                      width: 1.4rem;
+                  }
+
+                  span{
+                      margin: 0 0.5rem;
+                  }
+              }
+
+              .checkBoxChoice{
+                  margin: 0;
+              }
+
+
+           }
+      }
+  }
+
+}

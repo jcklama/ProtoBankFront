@@ -15,6 +15,6 @@ export class AppStoreDispatcher {
   }
 
   getAuthInfo() {
-    // return this.store.pipe(select())
+    // return this.store.pipe(select()
   }
 }

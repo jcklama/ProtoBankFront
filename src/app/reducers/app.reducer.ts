@@ -16,8 +16,6 @@ export const initialState: AppState = {
 export function reducer(state = initialState, action: AppActions): AppState {
   switch (action.type) {
     case AppActionTypes.setAuthInfo: {
-      console.log(action.payload.username);
-      console.log(action.payload.password);
       return {
         ...state,
         username: action.payload.username,

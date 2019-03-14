@@ -1,0 +1,49 @@
+@font-face{
+  font-family: 'caviar';
+  src: url(../../assets/Caviar-Dreams/CaviarDreams.ttf);
+}
+
+@font-face{
+  font-family: 'aller';
+  src: url(../../assets/Aller/Aller_Rg.ttf);
+}
+
+@font-face{
+  font-family: 'playfair';
+  src: url(../../assets/playfair-display/PlayfairDisplaySC-Regular.otf);
+}
+
+@font-face{
+  font-family: 'ptsans';
+  src: url(../../assets/pt-sans/PTS55F.ttf);
+}
+
+@font-face{
+  font-family: 'quicksand';
+  src: url(../../assets/quicksand/Quicksand-Regular.otf);
+}
+
+@font-face{
+  font-family: 'quicksand-bold';
+  src: url(../../assets/quicksand/Quicksand-Bold.otf);
+}
+
+@font-face{
+  font-family: 'tungsten-light';
+  src: url(../../assets/Tungsten-Light.otf);
+}
+
+// !default: assigns a value to a variable if they haven't been assigned to one
+// (e.g. assigns quicksand to $font-primary if it hasn't already been assigned)
+// We specify a specific vaue with !default.
+// And then if we need change for specificity (e.g. a specific bank), we use override using that bank's styling first
+// Ref: https://thoughtbot.com/blog/sass-default
+$font-primary: 'quicksand' !default;
+
+// colours
+$color-white: whitesmoke !default;
+$color-black: rgba(0,0,0,0.6) !default;
+$color-primary: rgba(255,215,0, 0.77) !default;
+$color-primary-light: darken($color-primary, 5%) !default;
+$color-error: red !default;
+

@@ -1,0 +1,19 @@
+$xxs:  320px;   /* smartphones, iPhone, portrait 480x320 phones */
+$xs:   481px;   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+$s:    641px;   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+$m:    961px;   /* tablet, landscape iPad, lo-res laptops ands desktops */
+$l:    1025px;  /* big landscape tablets, laptops, and desktops */
+$xl:   1281px;   /* hi-res laptops and desktops */
+
+
+// typically use max-width with a DESKTOP-FIRST approach; min-width for MOBILE-FIRST
+
+@mixin xxs { @media only screen and (max-width: $xxs){ @content;}}
+@mixin xs { @media only screen and (max-width: $xs){ @content;}}
+@mixin s { @media only screen and (max-width: $s){ @content;}}
+@mixin m { @media only screen and (max-width: $m){ @content;}}
+@mixin l { @media only screen and (max-width: $l){ @content;}}
+@mixin xl { @media only screen and (min-width: $l) and (max-width: $xl){ @content;}}
+
+
+
