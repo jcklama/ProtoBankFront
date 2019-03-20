@@ -3,9 +3,9 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import ResizeObserver from 'resize-observer-polyfill'
 import { AuthService } from '../services/auth-service.service';
-import { HttpParams } from '../../../node_modules/@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { AppStoreDispatcher } from '../dispatcher/dispatcher.store';
-// import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private dispatcher: AppStoreDispatcher
   ) { }
-
   loginForm: FormGroup;
   @ViewChild('wrapper') wrapper: ElementRef;
 
@@ -40,11 +39,11 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     })
 
-    const test = { a: "hi", b: "bye" }
-    // const testAssign = Object.assign({}, test, { b: "one", c: "two" })
-    const test2 = { b: "two", c: "three" }
-    const testAssign = { ...test, ...test2 }
-    console.log(testAssign);
+    // spread operator example
+    // const test = { a: "hi", b: "bye" }
+    // const test2 = { b: "two", c: "three" }
+    // const testAssign = { ...test, ...test2 }
+    // console.log(testAssign);
   }
 
   get username() {
@@ -56,19 +55,24 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      this.router.navigateByUrl('/registration');
+    const formValue = this.loginForm.value;
+    if (formValue.username && formValue.password) {
+      this.authService.login(formValue.username, formValue.password)
+        .subscribe(
+          resp => {
+            console.log(resp);
+            const loggedInInfo = {
+              id: resp.id,
+              signed_user: resp.signed_user,
+              token: resp.token,
+              expiresIn: resp.expiresIn
+            }
+            this.dispatcher.setAuthInfo(loggedInInfo)
+            this.router.navigateByUrl(`/dashboard`);
+          },
+          err => { console.log(err); }
+        )
     }
-    console.log('submitted!');
-    const loginInfo = { username: this.username.value, password: this.password.value };
-
-    this.dispatcher.setAuthInfo(loginInfo);
-    this.authService.login(loginInfo)
-      // .map((resp: Response) => resp.json())
-      .subscribe(
-        resp => { console.log(resp); },
-        err => { console.log(err); }
-      )
   }
 
 }

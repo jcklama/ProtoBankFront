@@ -1,3 +1,40 @@
-<p>
-  dashboard works!
-</p>
+<div class="c-dboard">
+  <header class="c-dboard-header">
+    <h3>{{'Welcome ' + balances?.first_name}}</h3>
+  </header>
+  <mat-card class="c-dboard-card__chqsvng-wrapper">
+    <mat-card-header>Accounts</mat-card-header>
+    <div class="c-dboard-card__chqsvng">
+      <mat-card class="c-dboard-card__chequing">
+        <mat-card-header>
+          <mat-card-title>Chequing</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{'Balance: ' + (balances?.chequing_balance | currency)}}</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="c-dboard-card__savings">
+        <mat-card-header>
+          <mat-card-title>Savings</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{'Balance: ' + (balances?.savings_balance | currency)}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card>
+  <mat-card class="c-dboard-card__cdtcrds-wrapper">
+    <mat-card-header>Credit Cards</mat-card-header>
+    <div class="c-dboard-card__cdtcrds">
+      <mat-card class="c-dboard-card__cdtcrd" *ngFor="let cc of balances?.credit_cards; let i = index" [attr.data-ccard]=i>
+        <mat-card-header>
+          <mat-card-title>{{cc?.card_no | maskcreditcard}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{cc?.current_balance | currency}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card>
+
+</div>

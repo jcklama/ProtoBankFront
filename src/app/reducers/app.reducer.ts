@@ -1,15 +1,17 @@
 import { ActionReducerMap } from '@ngrx/store'
 import { AppActions, AppActionTypes } from '../actions/app.actions'
+import { Balances } from '../../models/balances';
+import { AuthResp } from '../../models/loggedInInfo';
 
 // set the states in the initial states in the reducer
 export interface AppState {
-  username: string,
-  password: string
+  loginInfo: AuthResp,
+  balances: Balances
 }
 
 export const initialState: AppState = {
-  username: null,
-  password: null
+  loginInfo: null,
+  balances: null
 }
 
 // define the reducer function
@@ -18,9 +20,15 @@ export function reducer(state = initialState, action: AppActions): AppState {
     case AppActionTypes.setAuthInfo: {
       return {
         ...state,
-        username: action.payload.username,
-        password: action.payload.password
+        loginInfo: action.payload
       };
+    }
+
+    case AppActionTypes.setBalanceInfo: {
+      return {
+        ...state,
+        balances: action.payload
+      }
     }
 
     default:

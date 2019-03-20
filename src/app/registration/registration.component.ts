@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -42,12 +42,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   get products() {
-    console.log(this.registrationForm.get('products')["controls"]);
+    // console.log(this.registrationForm.get('products')["controls"]);
     return this.registrationForm.get('products');
   }
 
   buildOptionControls() {
-    const controls = [];
+    const controls: FormControl[] = [];
     this.productOptions.forEach((control) => {
       controls.push(this.fb.control(''));
     })
