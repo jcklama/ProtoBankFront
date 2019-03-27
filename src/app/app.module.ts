@@ -46,9 +46,10 @@ import { RoutingStateService } from './services/router-state.service';
     EffectsModule.forRoot([AppEffects]),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent },
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always' }
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '**', redirectTo: 'login' }
     ], {
         onSameUrlNavigation: 'reload',
         // enableTracing: true
