@@ -54,7 +54,7 @@ import { RoutingStateService } from './services/router-state.service';
         onSameUrlNavigation: 'reload',
         // enableTracing: true
       }),
-    // adds the reducer to the app. Also activates  the redux devtools
+    // adds the reducer to the app. Also activates the redux devtools
     StoreModule.forRoot(reducers),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule
