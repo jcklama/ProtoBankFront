@@ -1,0 +1,116 @@
+.c-dboard{
+  display: flex;
+  flex-direction: column;
+  font-family: 'quicksand';
+  font-size: 1.6rem;
+  color: $color-black;
+
+  .c-dboard-nav-list{
+    list-style: none;
+    margin: 0;
+    background-color: $color-secondary;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 50px 0 0;
+
+
+    .c-dboard-nav-listbutton{
+      background-color: $color-button-background;
+      color: $color-button-text;
+      padding: $button-padding;
+      font-family: $button-font-family;
+      font-weight: $button-font-weight;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover{
+        color: $color-white;
+      }
+    }
+  }
+
+  mat-card-title{
+    position: relative;
+    left: -15px;
+  }
+
+  #accounts_header, #credit_cards_header{
+    position: relative;
+    left: -15px;
+  }
+
+  .balance{
+    color: $color-primary-darker;
+    font-weight: 700;
+  }
+
+  .c-dboard-content{
+    padding: 0 50px;
+    background-color: $color-secondary;
+    min-height: 75vh;
+  }
+
+  header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+    background:
+    linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(../../assets/ball_banner.jpeg);
+    background-size: cover;
+    text-align: center;
+    font-size: 4.8rem;
+
+    h3{
+      color: $color-white;
+    }
+  }
+
+  .c-dboard-card__chqsvng-wrapper{
+    font-size: 3.2rem;
+    margin-top: 2.5%;
+    box-shadow: 0 0 0.10rem 0.10rem $color-black;
+    background-color: $color-white;
+
+    header h3{
+      font-weight: 500;
+    }
+
+    .c-dboard-card__chqsvng{
+      display: flex;
+      font-size: 3.2rem;
+      width: 70%;
+      font-size: 2.0rem;
+
+      @include s {
+        flex-direction: column;
+      }
+
+    }
+  }
+
+  .c-dboard-card__cdtcrds-wrapper{
+    font-size: 3.2rem;
+    margin: 2.5% 0;
+    box-shadow: 0 0 0.10rem 0.10rem $color-black;
+    background-color: $color-white;
+
+    header h3{
+      font-weight: 500;
+    }
+
+    .c-dboard-card__cdtcrds{
+      width: 70%;
+      display: flex;
+      font-size: 2.0rem;
+
+      @include s {
+        flex-direction: column;
+      }
+
+      }
+  }
+}

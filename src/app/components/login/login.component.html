@@ -1,0 +1,27 @@
+<div id="login">
+  <div id="left">
+    <h1>To
+      <div id="location">{{place}}</div> and back. Your money never went so far.</h1>
+  </div>
+  <div id="right">
+    <div id="form-wrapper" #wrapper>
+      <h1>ProtoBank
+        <i class="fas fa-compress-arrows-alt"></i>
+      </h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label for="username" class="visuallyhidden">Username</label>
+        <input type="text" placeholder="username" id="username" formControlName="username" (click)="inputClicked()" required>
+        <div *ngIf="username.errors?.required && username.touched" class="error">Please enter a username</div>
+        <label for="password" class="visuallyhidden">Password</label>
+        <input type="text" placeholder="password" id="password" formControlName="password" (click)="inputClicked()" required>
+        <div *ngIf="password.errors?.required && password.touched" class="error">Please enter a password</div>
+        <div *ngIf="error" class="error error-incorrect-combo">Incorrect Username & Password Combination</div>
+        <div id="buttons">
+          <button type="submit" id="loginBtn" (click)="onSubmit" [disabled]="!loginForm.valid">Login</button>
+          <button type="submit" id="registerBtn" (click)="register()">Register</button>
+        </div>
+      </form>
+      <mat-spinner *ngIf="pending" class="mat-progress-spinner"></mat-spinner>
+    </div>
+  </div>
+</div>

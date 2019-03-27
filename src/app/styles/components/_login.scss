@@ -1,31 +1,104 @@
 #login{
-  background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../../assets/rene-bohmer-481562-unsplash.jpg);
+  display: flex;
+
+  @include m{
+    flex-direction: column;
+  }
+
+  #left{
+  background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../../assets/plane_main.jpeg);
   background-size: cover;
   background-position: 50% 50% ;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
+  width: 50%;
 
+  @include m{
+    width: 100%;
+  }
+
+  h1{
+    position: relative;
+    margin-right: 100px;
+    font-size: 3.6rem;
+    width: 225px;
+    color: $color-primary;
+    font-family: $font-primary;
+
+    @include m{
+      width: 100%;
+      margin: 0;
+      padding: 50px;
+      text-align: center;
+    }
+
+    #location{
+      color: $color-white-secondary;
+
+    }
+  }
+}
+
+#right{
+
+  @include m{
+    width: 100%;
+  }
+
+  width: 50%;
+  min-height: 100vh;
+  background: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .mat-progress-spinner {
+    margin-top: 3.2rem;
+
+    circle{
+      stroke: #FFFFFF;
+
+      @include m {
+        stroke: $color-black-light;
+      }
+    }
+  }
 
   #form-wrapper{
-      height: 30rem;
-      width: 32.5rem;
-      background: $color-black;
+      height: 85%;
+      width: 80%;
+      background: $color-white-secondary;
       padding: 5rem;
       color: $color-white;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      box-shadow: 0.03rem 0.03rem 0.05rem 0.05rem dimgray;
+
+      @include m{
+        background: $color-white;
+        box-shadow: none;
+      }
+
 
       h1{
           margin-top: 0;
-          margin-bottom: 3rem;
+          margin-bottom: 2rem;
           font-family: $font-primary;
+          font-size: 3.9rem;
+          width: 250px;
+
+          @include m{
+            color: $color-primary;
+            font-size: 3.9rem;
+          }
 
           .fa-compress-arrows-alt{
-              color: $color-primary
+              color: $color-primary-light;
           }
       }
 
@@ -37,6 +110,7 @@
 
           input::-webkit-input-placeholder{
               font-family: $font-primary;
+              font-size: 1.6rem;
           }
 
           input{
@@ -45,14 +119,21 @@
               border: none;
               padding: 0.5rem;
               margin-bottom: 0.5rem;
+              width: 250px;
+              height: 35px;
+              font-size: 1.6rem;
           }
 
           .error{
-              font-family: $font-primary;
-              margin-bottom: 0.5rem;
+              padding: 0;
               color: $color-error;
-              font-size: 1.4rem;
               align-self: flex-start;
+              font-family: $font-primary;
+              letter-spacing: -0.1rem;
+              border: none;
+              margin-bottom: 0.5rem;
+              width: 250px;
+              font-size: 1.6rem;
           }
 
           #buttons{
@@ -64,18 +145,36 @@
                   padding:0.3rem 0.5rem 0.5rem 0.5rem;
                   border: none;
                   background: whitesmoke;
+                  height: 3.2rem;
+                  font-size: 1.6rem;
               }
 
               #loginBtn{
                   margin-right: 0.5rem;
                   width: calc(50% - 0.5rem);
+
+                  @include m{
+                    border: 1px solid $color-black-light;
+                  }
+
+                  &:focus{
+                    outline: none;
+                  }
               }
 
               #registerBtn{
+                  background: $color-primary-light;
+                  color: $color-black;
                   margin-left: 0.5rem;
                   width: calc(50% - 0.5rem);
+
+                  &:focus{
+                    outline: none;
+                  }
               }
           }
+
+        }
       }
   }
 }

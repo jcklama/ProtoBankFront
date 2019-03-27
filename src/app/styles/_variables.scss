@@ -42,8 +42,24 @@ $font-primary: 'quicksand' !default;
 
 // colours
 $color-white: whitesmoke !default;
+$color-white-secondary: lightgray !default;
 $color-black: rgba(0,0,0,0.6) !default;
+$color-black-light: rgba(0,0,0,0.3) !default;
 $color-primary: rgba(255,215,0, 0.77) !default;
-$color-primary-light: darken($color-primary, 5%) !default;
+$color-primary-light: lighten($color-primary, 5%) !default;
+$color-primary-dark: darken($color-primary, 5%) !default;
+$color-primary-darker: darken($color-primary, 10%) !default;
+$color-secondary: rgb(211,211,211) !default;
 $color-error: red !default;
+
+
+// buttons
+$color-button-background: rgb(211,211,211) !default;
+$color-button-text: rgba(0,0,0,0.6) !default;
+$button-hover-cursor: pointer;
+$button-padding: 10px 20px;
+$button-width: 100px;
+$button-border-radius: 3px;
+$button-font-family: 'quicksand';
+$button-font-weight: 700;
 

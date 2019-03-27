@@ -10,41 +10,41 @@
       <h3>Convenience without compromise</h3>
       <h3 id="bottomHeader">But first a few details:</h3>
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-        <div id="basicInfo" formGroupName="basicInfo">
+        <div id="basicInfo" formGroupName="basic_info">
           <h4 class="sectionTitle">Basic Info</h4>
           <div class="labels">
             <label for="firstName" class="visuallyhidden">First Name</label>
-            <input type="text" id="firstName" placeholder="First Name" formControlName="firstName">
+            <input type="text" id="firstName" placeholder="First Name" formControlName="first_name">
             <label for="lastName" class="visuallyhidden">Last Name</label>
-            <input type="text" id="lastName" placeholder="Last Name" formControlName="lastName">
+            <input type="text" id="lastName" placeholder="Last Name" formControlName="last_name">
             <label for="phoneNumber" class="visuallyhidden">Phone Number</label>
-            <input type="text" id="phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+            <input type="text" id="phoneNumber" placeholder="Phone Number" formControlName="phone_number">
             <label for="emailAddress" class="visuallyhidden">Email Address</label>
-            <input type="text" id="emailAddress" placeholder="Email Address" formControlName="emailAddress">
+            <input type="text" id="emailAddress" placeholder="Email Address" formControlName="email_address">
           </div>
         </div>
         <div id="addressInfo" formGroupName="address">
           <h4 class="sectionTitle">Address</h4>
           <div class="labels">
             <label for="streetNameNumber" class="visuallyhidden">Street Name and Number</label>
-            <input type="text" id="streetNameNumber" placeholder="Street No. and Name" formControlName="streetNameNumber">
+            <input type="text" id="streetNameNumber" placeholder="Street No. and Name" formControlName="street_no_and_name">
             <label for="city" class="visuallyhidden">City</label>
             <input type="text" id="city" placeholder="City" formControlName="city">
             <label for="country" class="visuallyhidden">Country</label>
-            <input type="text" id="country" placeholder="country" formControlName="country">
+            <input type="text" id="country" placeholder="Country" formControlName="country">
             <label for="postalCode" class="visuallyhidden">Postal Code</label>
-            <input type="text" id="postalCode" placeholder="Postal Code" formControlName="postalCode">
+            <input type="text" id="postalCode" placeholder="Postal Code" formControlName="postal_code">
           </div>
         </div>
-        <div id="bankingInfo" formGroupName="bankingInfo">
+        <div id="bankingInfo" formGroupName="banking_info">
           <h4 class="sectionTitle">Banking Info</h4>
           <div class="labels">
             <label for="occupation" class="visuallyhidden">Occupation</label>
             <input type="text" id="occupation" placeholder="Occupation" formControlName="occupation">
             <label for="salary" class="visuallyhidden">Annual Salary</label>
-            <input type="text" id="salary" placeholder="Annual Salary" formControlName="salary">
+            <input type="text" id="salary" placeholder="Annual Salary" formControlName="annual_salary">
             <label for="expenses" class="visuallyhidden">Monthly Expenses</label>
-            <input type="text" id="expenses" placeholder="Monthly Expenses" formControlName="expenses">
+            <input type="text" id="expenses" placeholder="Monthly Expenses" formControlName="monthly_expenses">
           </div>
         </div>
         <div id="products" formArrayName="products">
@@ -56,7 +56,10 @@
             </div>
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <div id="submission">
+          <button type="submit">Submit</button>
+          <mat-spinner [diameter]="30" class="mat-progress-spinner" [style.display]="submissionPending ? 'block' : 'none'"></mat-spinner>
+        </div>
         <!-- <p>{{registrationForm.valid}}</p>
         <p>{{registrationForm.value | json}}</p> -->
       </form>
