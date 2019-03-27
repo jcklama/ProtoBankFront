@@ -30,6 +30,7 @@
     "moment": "^2.24.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
+    "webpack": "^4.29.6",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
