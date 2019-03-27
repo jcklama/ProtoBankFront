@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AppStoreDispatcher } from '../../store/dispatcher/dispatcher.store';
 
 @Component({
   selector: 'app-registration',
@@ -15,30 +16,35 @@ export class RegistrationComponent implements OnInit {
     { name: 'Mortage' },
     { name: 'Credit Card' }
   ]
+  submissionPending: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private dispatcher: AppStoreDispatcher,
+  ) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      basicInfo: this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        phoneNumber: ['', Validators.required],
-        emailAddress: ['', Validators.required]
+      basic_info: this.fb.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        phone_number: ['', Validators.required],
+        email_address: ['', Validators.required]
       }),
       address: this.fb.group({
-        streetNameNumber: ['', Validators.required],
+        street_no_and_name: ['', Validators.required],
         city: ['', Validators.required],
         country: ['', Validators.required],
-        postalCode: ['', Validators.required]
+        postal_code: ['', Validators.required]
       }),
-      bankingInfo: this.fb.group({
+      banking_info: this.fb.group({
         occupation: ['', Validators.required],
-        salary: ['', Validators.required],
-        expenses: ['', Validators.required]
+        annual_salary: ['', Validators.required],
+        monthly_expenses: ['', Validators.required]
       }),
       products: this.fb.array(this.buildOptionControls())
     })
+
   }
 
   get products() {
@@ -54,4 +60,13 @@ export class RegistrationComponent implements OnInit {
     return controls;
   }
 
+  onSubmit() {
+    this.dispatcher.setNewUser(this.registrationForm.value);
+    this.dispatcher.getPendingState().subscribe(resp => {
+      this.submissionPending = resp;
+    });
+  }
+
+
 }
+

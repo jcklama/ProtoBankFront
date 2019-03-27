@@ -1,9 +1,10 @@
 import { MatCardModule } from '@angular/material/card';
 import { NgModule } from '../../node_modules/@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  imports: [MatCardModule],
-  exports: [MatCardModule]
+  imports: [MatCardModule, MatProgressSpinnerModule],
+  exports: [MatCardModule, MatProgressSpinnerModule]
 })
 
 export class AppMaterialModule { }

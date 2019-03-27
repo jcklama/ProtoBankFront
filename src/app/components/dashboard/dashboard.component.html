@@ -1,0 +1,58 @@
+<div class="c-dboard">
+  <div class="c-dboard-nav">
+    <ul class="c-dboard-nav-list">
+      <li>
+        <button class="c-dboard-nav-listbutton c-dboard-nav-listbutton__billpay">Bill Payments</button>
+      </li>
+      <li>
+        <button class="c-dboard-nav-listbutton c-dboard-nav-listbutton__inbox">Inbox</button>
+      </li>
+      <li>
+        <button class="c-dboard-nav-listbutton c-dboard-nav-listbutton__logout" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+  <!-- <button class="c-dboard-button__logout" (click)="logout()">Logout</button> -->
+  <header class="c-dboard-header">
+    <h3>{{'Welcome ' + balances?.first_name}}</h3>
+  </header>
+  <div class="c-dboard-content">
+    <mat-card class="c-dboard-card__chqsvng-wrapper">
+      <mat-card-header id="accounts_header">Accounts</mat-card-header>
+      <div class="c-dboard-card__chqsvng">
+        <mat-card class="c-dboard-card__chequing">
+          <mat-card-header>
+            <mat-card-title>Chequing</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <span>Balance: </span>
+            <span class="balance">{{(balances?.chequing_balance | currency)}}</span>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="c-dboard-card__savings">
+          <mat-card-header>
+            <mat-card-title>Savings</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <span>Balance: </span>
+            <span class="balance">{{(balances?.savings_balance | currency)}}</span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card>
+    <mat-card class="c-dboard-card__cdtcrds-wrapper">
+      <mat-card-header id="credit_cards_header">Credit Cards</mat-card-header>
+      <div class="c-dboard-card__cdtcrds">
+        <mat-card class="c-dboard-card__cdtcrd" *ngFor="let cc of balances?.credit_cards; let i = index" [attr.data-ccard]=i>
+          <mat-card-header>
+            <mat-card-title class="c-dboard-card__cdtcrd-number">{{cc?.card_no | maskcreditcard}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <span>Balance: </span>
+            <span class="balance">{{(cc?.current_balance | currency)}}</span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+</div>

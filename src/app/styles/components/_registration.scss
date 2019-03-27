@@ -7,6 +7,17 @@
     flex-direction: column;
   }
 
+  .mat-progress-spinner{
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
+    // left: 30px;
+  }
+
+  .mat-progress-spinner circle{
+    stroke: $color-black !important;
+  }
+
   #left-panel, #right-panel{
       width: 50%;
       min-height: 100vh;
@@ -93,17 +104,23 @@
                   border-bottom: 0.2rem solid $color-primary-light;
               }
 
-              button{
-                  width: 12rem;
-                  padding: 0.7px 1rem 0.7rem 1rem;
-                  font-family: $font-primary;
-                  margin-top: 1rem;
-                  margin: 0 auto;
-                  border: 0.1rem solid rgba(0,0,0,0.4);
-              }
+              #submission{
+                align-self: center;
+                display: flex;
+                justify-content: space-between;
+                // padding: 0 40%;
+                width: 160px;
 
-              button:focus{
-                  outline: 0;
+                button{
+                    width: 12rem;
+                    padding: 0.7rem 1rem 0.7rem 1rem;
+                    font-family: $font-primary;
+                    border: 0.1rem solid rgba(0,0,0,0.4);
+                }
+
+                button:focus{
+                    outline: 0;
+                }
               }
 
               .products{

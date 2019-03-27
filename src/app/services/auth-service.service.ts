@@ -1,23 +1,24 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { loginInfo } from '../../models/loginInfo';
-import { throwError } from 'rxjs';
-import { catchError, shareReplay, map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { ROUTES } from '../routes/routes';
 import * as moment from 'moment';
-import { AuthResp } from '../../models/loggedInInfo';
-import { Balances } from '../../models/balances';
+import { AuthResp } from '../models/loggedInInfo';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
 
   baseUrl: string;
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<any> {
     const body = {
       username: username,
       password: password
@@ -25,20 +26,14 @@ export class AuthService {
     // post now receives a typed object of AuthResp
     return this.http.post<AuthResp>(ROUTES.login, body)
       .pipe(
-        // map((resp: loginInfo) => resp.json()),
-        tap(res => this.setSession(res)), // tap performs side effects/actions; peers into the request/response but does not mutate it (e.g. logging)
+        // tap performs side effects/actions; peers into the request/response but does not mutate it (e.g. logging)
+        tap(res => {
+          this.setSession(res)
+        }),
         catchError(this.handleError),
         // In this case to prevent reciever of Observable from accidentally triggering multiple POST requests due to multiple subscriptions
         // if there are taxing computations / will have late subscribers
         shareReplay()
-      )
-  }
-
-  getBalances(id: string) {
-    const path = ROUTES.balances.replace('{id}', id);
-    return this.http.get<Balances>(path)
-      .pipe(
-        catchError(this.handleError)
       )
   }
 
@@ -63,7 +58,7 @@ export class AuthService {
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
   }
 
-  // these helper methods help display certain elements on the UI based on the local storage token state
+  // Helper methods help display certain elements on the UI based on the local storage token state:
   public isLoggedIn() {
     return moment().isBefore(this.getExpiration());
   }
@@ -76,6 +71,12 @@ export class AuthService {
 
   public isLoggedOut() {
     return !this.isLoggedIn();
+  }
+
+  public logout(route: string) {
+    localStorage.removeItem('expires_at');
+    localStorage.removeItem('id_token');
+    this.router.navigateByUrl(route);
   }
 
 
