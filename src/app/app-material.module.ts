@@ -1,5 +1,5 @@
 import { MatCardModule } from '@angular/material/card';
-import { NgModule } from '../../node_modules/@angular/core';
+import { NgModule } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({

@@ -13,38 +13,143 @@
         <div id="basicInfo" formGroupName="basic_info">
           <h4 class="sectionTitle">Basic Info</h4>
           <div class="labels">
-            <label for="firstName" class="visuallyhidden">First Name</label>
-            <input type="text" id="firstName" placeholder="First Name" formControlName="first_name">
-            <label for="lastName" class="visuallyhidden">Last Name</label>
-            <input type="text" id="lastName" placeholder="Last Name" formControlName="last_name">
-            <label for="phoneNumber" class="visuallyhidden">Phone Number</label>
-            <input type="text" id="phoneNumber" placeholder="Phone Number" formControlName="phone_number">
-            <label for="emailAddress" class="visuallyhidden">Email Address</label>
-            <input type="text" id="emailAddress" placeholder="Email Address" formControlName="email_address">
+            <div class="fn">
+              <label for="firstName" class="visuallyhidden">First Name</label>
+              <input type="text" id="firstName" placeholder="First Name" formControlName="first_name" required>
+              <div class="error" *ngIf="getControl('basic_info','first_name').invalid && (getControl('basic_info','first_name').touched || getControl('basic_info','first_name').dirty)">
+                <div *ngIf="getControl('basic_info','first_name').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('basic_info','first_name').errors?.minlength">
+                  Must be at least 2 characters
+                </div>
+              </div>
+            </div>
+            <div class="ln">
+              <label for="lastName" class="visuallyhidden">Last Name</label>
+              <input type="text" id="lastName" placeholder="Last Name" formControlName="last_name" required>
+              <div class="error" *ngIf="getControl('basic_info','last_name').invalid && (getControl('basic_info','last_name').touched || getControl('basic_info','last_name').dirty)">
+                <div *ngIf="getControl('basic_info','last_name').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('basic_info','last_name').errors?.minlength">
+                  Must be at least 2 characters
+                </div>
+              </div>
+            </div>
+            <div class="pn">
+              <label for="phoneNumber" class="visuallyhidden">Phone Number</label>
+              <input type="text" id="phoneNumber" placeholder="Phone Number" formControlName="phone_number" (input)="numberValidator($event)"
+                required>
+              <div class="error" *ngIf="getControl('basic_info','phone_number').invalid && (getControl('basic_info','phone_number').touched || getControl('basic_info','phone_number').dirty)">
+                <div *ngIf="getControl('basic_info','phone_number').errors?.required">
+                  Field cannot be empty
+                </div>
+              </div>
+            </div>
+            <div class="ea">
+              <label for="emailAddress" class="visuallyhidden">Email Address</label>
+              <input type="text" id="emailAddress" placeholder="Email Address" formControlName="email_address" required (input)="showErrors(getControl('basic_info'))">
+              <div class="error" *ngIf="getControl('basic_info','email_address').invalid && (getControl('basic_info','email_address').touched || getControl('basic_info','email_address').dirty)">
+                <div *ngIf="getControl('basic_info','email_address').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('basic_info', 'email_address').errors?.forbiddenEmail && !getControl('basic_info','email_address').errors?.required">
+                  Invalid format (e.g. abc@xyz.com)
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div id="addressInfo" formGroupName="address">
           <h4 class="sectionTitle">Address</h4>
           <div class="labels">
-            <label for="streetNameNumber" class="visuallyhidden">Street Name and Number</label>
-            <input type="text" id="streetNameNumber" placeholder="Street No. and Name" formControlName="street_no_and_name">
-            <label for="city" class="visuallyhidden">City</label>
-            <input type="text" id="city" placeholder="City" formControlName="city">
-            <label for="country" class="visuallyhidden">Country</label>
-            <input type="text" id="country" placeholder="Country" formControlName="country">
-            <label for="postalCode" class="visuallyhidden">Postal Code</label>
-            <input type="text" id="postalCode" placeholder="Postal Code" formControlName="postal_code">
+            <div class="strtNmeNbr">
+              <label for="streetNameNumber" class="visuallyhidden">Street Name and Number</label>
+              <input type="text" id="streetNameNumber" placeholder="Street No. and Name" formControlName="street_no_and_name" required>
+              <div class="error" *ngIf="getControl('address','street_no_and_name').invalid && (getControl('address','street_no_and_name').touched || getControl('address','street_no_and_name').dirty)">
+                <div *ngIf="getControl('address', 'street_no_and_name').errors?.required">
+                  Field cannot be empty
+                </div>
+              </div>
+            </div>
+            <div class="city">
+              <label for="city" class="visuallyhidden">City</label>
+              <input type="text" id="city" placeholder="City" formControlName="city" required>
+              <div class="error" *ngIf="getControl('address','city').invalid && (getControl('address','city').touched || getControl('address','city').dirty)">
+                <div *ngIf="getControl('address', 'city').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('address', 'city').errors?.numbersPresent && !getControl('address', 'city').errors?.required">
+                  Field must only include alphabetic characters
+                </div>
+              </div>
+            </div>
+            <div class="ctry">
+              <label for="country" class="visuallyhidden">Country</label>
+              <input type="text" id="country" placeholder="Country" formControlName="country" required>
+              <div class="error" *ngIf="getControl('address','country').invalid && (getControl('address','country').touched || getControl('address','country').dirty)">
+                <div *ngIf="getControl('address', 'country').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('address', 'country').errors?.numbersPresent && !getControl('address', 'country').errors?.required">
+                  Field must only include alphabetic characters
+                </div>
+              </div>
+            </div>
+            <div class="pstlCde">
+              <label for="postalCode" class="visuallyhidden">Postal Code</label>
+              <input type="text" id="postalCode" placeholder="Postal Code" formControlName="postal_code" required>
+              <div class="error" *ngIf="getControl('address','postal_code').invalid && (getControl('address','postal_code').touched || getControl('address','postal_code').dirty)">
+                <div *ngIf="getControl('address', 'postal_code').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('address', 'postal_code').errors?.noLettersNoNumbers && !getControl('address', 'postal_code').errors?.required">
+                  Field must be in the format A1A 1A1
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div id="bankingInfo" formGroupName="banking_info">
           <h4 class="sectionTitle">Banking Info</h4>
           <div class="labels">
-            <label for="occupation" class="visuallyhidden">Occupation</label>
-            <input type="text" id="occupation" placeholder="Occupation" formControlName="occupation">
-            <label for="salary" class="visuallyhidden">Annual Salary</label>
-            <input type="text" id="salary" placeholder="Annual Salary" formControlName="annual_salary">
-            <label for="expenses" class="visuallyhidden">Monthly Expenses</label>
-            <input type="text" id="expenses" placeholder="Monthly Expenses" formControlName="monthly_expenses">
+            <div class="occptn">
+              <label for="occupation" class="visuallyhidden">Occupation</label>
+              <input type="text" id="occupation" placeholder="Occupation" formControlName="occupation" required>
+              <div class="error" *ngIf="getControl('banking_info','occupation').invalid && (getControl('banking_info','occupation').touched || getControl('banking_info','occupation').dirty)">
+                <div *ngIf="getControl('banking_info', 'occupation').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('banking_info', 'occupation').errors?.numbersPresent && !getControl('banking_info', 'occupation').errors?.required">
+                  Field must only include alphabetic characters
+                </div>
+              </div>
+            </div>
+            <div class="slry">
+              <label for="salary" class="visuallyhidden">Annual Salary</label>
+              <input type="text" id="salary" placeholder="Annual Salary" formControlName="annual_salary" required>
+              <div class="error" *ngIf="getControl('banking_info','annual_salary').invalid && (getControl('banking_info','annual_salary').touched || getControl('banking_info','annual_salary').dirty)">
+                <div *ngIf="getControl('banking_info', 'annual_salary').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('banking_info', 'annual_salary').errors?.lettersPresent && !getControl('banking_info', 'annual_salary').errors?.required">
+                  Field must only include numeric characters
+                </div>
+              </div>
+            </div>
+            <div class="expses">
+              <label for="expenses" class="visuallyhidden">Monthly Expenses</label>
+              <input type="text" id="expenses" placeholder="Monthly Expenses" formControlName="monthly_expenses" required>
+              <div class="error" *ngIf="getControl('banking_info','monthly_expenses').invalid && (getControl('banking_info','monthly_expenses').touched || getControl('banking_info','monthly_expenses').dirty)">
+                <div *ngIf="getControl('banking_info', 'monthly_expenses').errors?.required">
+                  Field cannot be empty
+                </div>
+                <div *ngIf="getControl('banking_info', 'monthly_expenses').errors?.lettersPresent && !getControl('banking_info', 'monthly_expenses').errors?.required">
+                  Field must only include numeric characters
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div id="products" formArrayName="products">
@@ -57,11 +162,13 @@
           </div>
         </div>
         <div id="submission">
-          <button type="submit">Submit</button>
-          <mat-spinner [diameter]="30" class="mat-progress-spinner" [style.display]="submissionPending ? 'block' : 'none'"></mat-spinner>
+          <button type="submit" [disabled]="!registrationForm.valid">Submit</button>
+          <mat-spinner [diameter]="30" class="mat-progress-spinner" [style.display]="submissionPending || registrationForm.pending? 'block' : 'none'"></mat-spinner>
         </div>
-        <!-- <p>{{registrationForm.valid}}</p>
-        <p>{{registrationForm.value | json}}</p> -->
+        <div class="fnLnEmailValidationError error" *ngIf="registrationForm.errors?.lnFnEmailValidationFail">First name, last name and email address already exist</div>
+        <!-- <div>{{'Pending: ' + registrationForm.pending | json}}</div>
+        <p>{{'Valid: ' + registrationForm.valid}}</p> -->
+        <!-- <p>{{registrationForm.value | json}}</p> -->
       </form>
     </div>
   </div>

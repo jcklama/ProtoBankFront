@@ -1,12 +1,13 @@
-import { Injectable } from "../../../node_modules/@angular/core";
-import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
-import { catchError, tap, map } from '../../../node_modules/rxjs/operators';
-import { ROUTES } from 'src/app/routes/routes';
-import { throwError } from '../../../node_modules/rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, tap, map, every, flatMap, delay } from 'rxjs/operators';
+import { ROUTES } from '../routes/routes';
+import { throwError } from 'rxjs';
 import { Registration } from '../models/registration';
 import { RegisteredUser } from '../models/registeredUser';
 import * as moment from 'moment';
 import { RegistrationDashboardAdapter } from '../adapters/registration-dashboard.adpater';
+import { RegisteredUserInfo } from '../models/registeredUserInfo';
 
 @Injectable()
 export class RegistrationService {
@@ -22,6 +23,19 @@ export class RegistrationService {
         map((res: RegisteredUser) => new RegistrationDashboardAdapter().transform(res)),
         catchError(this.handleError)
       )
+  }
+
+  checkIfRegistered(fn: string, ln: string, email: string) {
+    return this.http.get<RegisteredUserInfo[]>(ROUTES.registeredUsersInfo)
+      .pipe(
+        delay(500),
+        map(data => // data returns the array of RegsisteredUsers
+          data.filter(user => { // applying filter function here to each element in array
+            return user.basic_info.first_name === fn && user.basic_info.last_name === ln && user.basic_info.email_address === email
+          })),
+        map(numOfMatchedUsers => numOfMatchedUsers.length > 0 ? true : false)
+      )
+    // interception methods can be handled here or in the validator
   }
 
   // TODO: abstract this method into an interceptor

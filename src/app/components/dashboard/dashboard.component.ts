@@ -3,8 +3,8 @@ import { AuthService } from '../../services/auth-service.service';
 import { AppStoreDispatcher } from '../../store/dispatcher/dispatcher.store';
 import { DashboardVM } from '../../models/viewModels/dashboard';
 import { DashboardService } from '../../services/dashboard.service';
-import { Router, ActivatedRoute, RoutesRecognized, NavigationEnd, NavigationStart } from '../../../../node_modules/@angular/router';
-import { filter, pairwise, bufferCount, first, last } from '../../../../node_modules/rxjs/operators';
+import { Router, ActivatedRoute, RoutesRecognized, NavigationEnd, NavigationStart } from '@angular/router';
+import { filter, pairwise, bufferCount, first, last } from 'rxjs/operators';
 import { RoutingStateService } from '../../services/router-state.service';
 
 @Component({

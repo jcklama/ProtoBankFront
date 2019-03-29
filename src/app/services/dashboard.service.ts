@@ -1,9 +1,9 @@
-import { Injectable } from "../../../node_modules/@angular/core";
-import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Balances } from '../models/balances';
-import { catchError, tap, map } from '../../../node_modules/rxjs/operators';
-import { ROUTES } from 'src/app/routes/routes';
-import { throwError } from '../../../node_modules/rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
+import { ROUTES } from '../routes/routes';
+import { throwError } from 'rxjs';
 import { LoginDashBoardAdapter } from '../adapters/login-dashboard.adapter';
 
 @Injectable()

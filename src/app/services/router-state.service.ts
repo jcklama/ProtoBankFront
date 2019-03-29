@@ -1,6 +1,6 @@
-import { Injectable } from "../../../node_modules/@angular/core";
-import { Router, NavigationEnd } from '../../../node_modules/@angular/router';
-import { filter } from '../../../node_modules/rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 
 @Injectable()

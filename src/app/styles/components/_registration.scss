@@ -70,12 +70,50 @@
               display: flex;
               flex-direction: column;
 
-              .sectionTitle{
-                  margin-bottom: 1rem;
+              .error{
+                padding-left: 0.5rem;
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+                color: $color-error;
               }
+
               .labels{
                   display: flex;
                   flex-wrap: wrap;
+                  width: 100%;
+
+                  .sectionTitle{
+                    margin-bottom: 1rem;
+                  }
+
+                  .fn, .ln, .pn, .ea, .strtNmeNbr, .city, .ctry, .pstlCde, .occptn, .slry, .expses{
+                    width: calc(50% - 1rem);
+
+                    input{
+                      border: 0.2rem solid transparent;
+                      padding: 0.5rem;
+                      width: calc(100% - 1rem);
+                      margin-right: 1rem;
+                      margin-bottom: 0.7rem;
+                      font-family: $font-primary;
+
+                      @include s {
+                        width: 100%;
+                      }
+
+                      &:focus{
+                        outline: 0;
+                        border-bottom: 0.2rem solid $color-primary-light;
+                      }
+                    }
+
+                    .error{
+                      padding-left: 0.5rem;
+                      font-size: 1.2rem;
+                      margin-bottom: 0.5rem;
+                      color: $color-error;
+                    }
+                  }
               }
 
               .productlabels{
@@ -84,24 +122,6 @@
 
               input::-webkit-input-placeholder{
                   font-family: $font-primary;
-              }
-
-              input{
-                  border: 0.2rem solid transparent;
-                  padding: 0.5rem;
-                  width: calc(50% - 1rem);
-                  margin-bottom: 1rem;
-                  margin-right: 1rem;
-                  font-family: $font-primary;
-
-                  @include s {
-                    width: 100%;
-                  }
-              }
-
-              input:focus{
-                  outline: 0;
-                  border-bottom: 0.2rem solid $color-primary-light;
               }
 
               #submission{
@@ -116,10 +136,14 @@
                     padding: 0.7rem 1rem 0.7rem 1rem;
                     font-family: $font-primary;
                     border: 0.1rem solid rgba(0,0,0,0.4);
-                }
 
-                button:focus{
+                  &:focus{
                     outline: 0;
+                  }
+
+                  &:disabled{
+                    opacity: 0.5;
+                  }
                 }
               }
 
@@ -141,6 +165,10 @@
                   margin: 0;
               }
 
+              .fnLnEmailValidationError{
+                text-align: center;
+                margin-top: 0.5rem;
+              }
 
            }
       }

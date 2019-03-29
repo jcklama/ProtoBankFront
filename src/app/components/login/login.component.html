@@ -13,7 +13,18 @@
         <input type="text" placeholder="username" id="username" formControlName="username" (click)="inputClicked()" required>
         <div *ngIf="username.errors?.required && username.touched" class="error">Please enter a username</div>
         <label for="password" class="visuallyhidden">Password</label>
-        <input type="text" placeholder="password" id="password" formControlName="password" (click)="inputClicked()" required>
+        <div class="password">
+          <input type="input" *ngIf="showPassword" placeholder="password" id="password" formControlName="password" (click)="inputClicked()"
+            required>
+          <input type="password" *ngIf="!showPassword" placeholder="password" id="password" formControlName="password" (click)="inputClicked()"
+            required>
+          <span class="eye-open" *ngIf="!showPassword" (click)="togglePasswordShow()">
+            <i class="fas fa-eye"></i>
+          </span>
+          <span class="eye-closed" *ngIf="showPassword" (click)="togglePasswordShow()">
+            <i class="fas fa-eye-slash"></i>
+          </span>
+        </div>
         <div *ngIf="password.errors?.required && password.touched" class="error">Please enter a password</div>
         <div *ngIf="error" class="error error-incorrect-combo">Incorrect Username & Password Combination</div>
         <div id="buttons">

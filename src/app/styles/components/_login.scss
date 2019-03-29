@@ -122,6 +122,30 @@
               width: 250px;
               height: 35px;
               font-size: 1.6rem;
+
+              &:focus{
+                outline: none;
+              }
+          }
+
+          .password{
+            position: relative;
+
+            .eye-open{
+              position: absolute;
+              font-size: 15px;
+              top: 11px;
+              right: 10px;
+              color: gray;
+            }
+
+            .eye-closed{
+              position: absolute;
+              font-size: 15px;
+              top: 11px;
+              right: 10px;
+              color: gray;
+            }
           }
 
           .error{

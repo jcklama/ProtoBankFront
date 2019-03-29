@@ -11,12 +11,12 @@ import {
   SetAuthInfoError,
   SetAuthInfoSuccess
 } from '../actions/app.actions';
-import { switchMap, map, catchError, debounceTime, exhaustMap } from '../../../../node_modules/rxjs/operators';
+import { switchMap, map, catchError, debounceTime, exhaustMap } from 'rxjs/operators';
 import { RegistrationService } from '../../services/registration.service';
 import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from '../../services/auth-service.service';
-import { of } from '../../../../node_modules/rxjs';
-import { Router } from '../../../../node_modules/@angular/router';
+import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AppEffects {
