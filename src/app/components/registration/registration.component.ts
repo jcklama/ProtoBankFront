@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AppStoreDispatcher } from '../../store/dispatcher/dispatcher.store';
+import { RegistrationValidators } from '../../validators/SyncRegistrationValidators';
+import { EmailContainsFnValidator } from '../../validators/AsyncRegistrationValidators';
+import { RegistrationService } from '../../services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -21,34 +24,34 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dispatcher: AppStoreDispatcher,
+    private registrationService: RegistrationService
   ) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
       basic_info: this.fb.group({
-        first_name: ['', Validators.required],
-        last_name: ['', Validators.required],
-        phone_number: ['', Validators.required],
-        email_address: ['', Validators.required]
+        first_name: ['', [Validators.required, Validators.minLength(2)]],
+        last_name: ['', [Validators.required, Validators.minLength(2)]],
+        phone_number: ['', [Validators.required]],
+        email_address: ['', [Validators.required, RegistrationValidators.forbiddenEmailValidator(/.+@[a-zA-z]+\.[a-zA-z]+/i)]]
       }),
       address: this.fb.group({
-        street_no_and_name: ['', Validators.required],
-        city: ['', Validators.required],
-        country: ['', Validators.required],
-        postal_code: ['', Validators.required]
+        street_no_and_name: ['', [Validators.required]],
+        city: ['', [Validators.required, RegistrationValidators.noNumbersValidator(/^[a-zA-z]+$/)]],
+        country: ['', [Validators.required, RegistrationValidators.noNumbersValidator(/^[a-zA-z]+$/)]],
+        postal_code: ['', [Validators.required, RegistrationValidators.
+          lettersNumbersOnlyValidator(/^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ ]?\d[ABCEGHJ-NPRSTV-Z]\d$/)]]
       }),
       banking_info: this.fb.group({
-        occupation: ['', Validators.required],
-        annual_salary: ['', Validators.required],
-        monthly_expenses: ['', Validators.required]
+        occupation: ['', [Validators.required, RegistrationValidators.noNumbersValidator(/^[a-zA-z]+$/)]],
+        annual_salary: ['', [Validators.required, RegistrationValidators.noLettersValidator(/^[0-9]+$/)]],
+        monthly_expenses: ['', [Validators.required, RegistrationValidators.noLettersValidator(/^[0-9]+$/)]]
       }),
       products: this.fb.array(this.buildOptionControls())
-    })
-
+    }, { asyncValidators: EmailContainsFnValidator(this.registrationService) })
   }
 
   get products() {
-    // console.log(this.registrationForm.get('products')["controls"]);
     return this.registrationForm.get('products');
   }
 
@@ -67,6 +70,25 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+  getControl(controlOne: string, controlTwo?: string) {
+    if (controlOne && controlTwo) {
+      return this.registrationForm.get(controlOne).get(controlTwo);
+    } else if (controlOne && !controlTwo) {
+      return this.registrationForm.get(controlOne);
+    }
+    // better way is to just have one method whilst passing in ('basic_info.first_name') as an example
+  }
+
+  showErrors(control: FormControl) {
+    console.log(control.errors);
+  }
+
+  numberValidator(event: any) {
+    const input = event.target.value;
+    if (!/^[0-9]+$|\(|\)|\-/.test(input)) {
+      event.target.value = event.target.value.replace(/[^0-9]/gi, '')
+    }
+  }
 
 }
 

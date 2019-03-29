@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   place: string;
   updateIntervalId: number;
   inputControlClicked: boolean = false;
+  showPassword: boolean = false;
   @ViewChild('wrapper') wrapper: ElementRef;
 
   ngOnInit() {
@@ -98,6 +99,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   inputClicked() {
     this.error = false;
+  }
+
+  togglePasswordShow() {
+    this.showPassword = !this.showPassword;
   }
 
 }
