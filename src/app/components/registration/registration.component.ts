@@ -79,10 +79,6 @@ export class RegistrationComponent implements OnInit {
     // better way is to just have one method whilst passing in ('basic_info.first_name') as an example
   }
 
-  showErrors(control: FormControl) {
-    console.log(control.errors);
-  }
-
   numberValidator(event: any) {
     const input = event.target.value;
     if (!/^[0-9]+$|\(|\)|\-/.test(input)) {
